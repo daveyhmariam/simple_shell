@@ -1,11 +1,11 @@
 #include "header.h"
 /**
- * concat - Concatenates Path strings with execubles
+ * conc - Concatenates Path strings with execubles
  * @_dir: PATH strings
  * @cmd: cmd to be concatenated with the directory
  * Return: Buffer to concatenated path
  */
-char *concat(char *_dir, char *cmd)
+char *conc(char *_dir, char *cmd)
 {
 	int i, j = 0, len1, len2;
 	char *cmdPath = NULL;

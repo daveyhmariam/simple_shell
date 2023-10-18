@@ -34,10 +34,7 @@ int main(void)
 					}
 				}
 				else
-				{
-					exit_stat = _exec(arguments);
-					free(entry);
-				}
+					exit_stat = _exec(arguments), free(entry);
 			}
 			else
 				free(entry);

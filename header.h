@@ -16,7 +16,7 @@ extern char **environ;
 int _strcmp(char *str1, char *str2);
 int checkPath(char **arguments);
 char *_strdup(char *str);
-char *concat(char *dir_path, char *command);
+char *conc(char *dir_path, char *command);
 int _exec(char **arguments);
 int getArgs(char *entry, char **arguments);
 int printNums(int n);

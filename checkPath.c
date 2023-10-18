@@ -25,40 +25,40 @@ int isFile(char *pathtok)
  */
 int checkPath(char **arguments)
 {
-	char *_PATH = NULL; /**"/usr/bin:/bin:/usr/games:/usr/local/games"*/
-	char *tmpPATH = NULL;
-	char *pathtok = NULL; /**"   /usr/bin    "*/
-	char *fullPath = NULL; /**"   /usr/bin/touch      "*/
-	char *argConcat[121];
-	int isFile_stat = -1, i = 0;
+	char *_PATH = NULL;
+	char *pathCopy = NULL;
+	char *dirPath = NULL;
+	char *fullPath = NULL;
+	char *concat[121];
+	int exist_stat = -1, i = 0;
 
-	_PATH = _getenv("pathtok");
+	_PATH = _getenv("PATH");
 	if (_PATH == NULL)
 		return (-1);
-	tmpPATH = (_strdup(_PATH));
-	pathtok = strtok(tmpPATH, ":");
-	if (pathtok == NULL)
+	pathCopy = (_strdup(_PATH));
+	dirPath = strtok(pathCopy, ":");
+	if (dirPath == NULL)
 		return (-1);
 	free(_PATH);
-	while (isFile_stat == -1 && pathtok != NULL)
+	while (exist_stat == -1 && dirPath != NULL)
 	{
-		fullPath = concat(pathtok, arguments[0]);
-		argConcat[i] = fullPath;
-		isFile_stat = isFile(argConcat[i]);
-		pathtok = strtok(NULL, ":");
+		fullPath = conc(dirPath, arguments[0]);
+		concat[i] = fullPath;
+		exist_stat = isFile(concat[i]);
+		dirPath = strtok(NULL, ":");
 		i++;
 	}
 	i--;
-	free(tmpPATH);
-	freeVect(argConcat, i);
-	if (isFile_stat == 0)
+	free(pathCopy);
+	freeVect(concat, i);
+	if (exist_stat == 0)
 	{
-		arguments[0] = argConcat[i];
+		arguments[0] = concat[i];
 		return (0);
 	}
 	else
 	{
-		free(argConcat[i]);
+		free(concat[i]);
 		return (-1);
 	}
 }
